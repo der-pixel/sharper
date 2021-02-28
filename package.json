@@ -1,0 +1,20 @@
+{
+  "name": "sharper",
+  "version": "1.0.0",
+  "description": "Sharper is a web app that serves as a UI for the sharp WebP converter (https://github.com/lovell/sharp).",
+  "main": "index.js",
+  "scripts": {
+    "test": "",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carlosdariodev/sharper.git"
+  },
+  "author": "Carlos Dario",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "express": "^4.17.1",
+    "sharp": "^0.27.2"
+  }
+}
