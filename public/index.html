@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="style/style.css">
+    <title>Sharper</title>
+</head>
+<body>
+    <main>
+        <picture>
+            <img src="images/sharp.svg" alt="Icon of the web app" id="main-icon"/>
+        </picture>
+        <h1>Sharper</h1>
+        <form action="" method="post">
+            <fieldset id="files">
+                <legend>Select files</legend>
+                <div id="file-loader">
+                    <label for="load-files">Load files</label>
+                    <input type="file" multiple="multiple" name="load-files" id="load-files" accept="image/jpeg, image/png, image/webp, image/avif, image/tiff, image/gif, ">
+                    <picture id="file-loader-img">
+                        <img src="images/image-loader.svg" alt=""/>
+                    </picture>
+                    <p>The files must be JPEG, PNG, WebP, AVIF, TIFF or GIF</p>
+                </div>
+            </fieldset>
+            <fieldset id="options">
+                <legend>Options</legend>
+                <div id="options-sliders">
+                    <p>Resolution</p>
+                    <div id="resolution">
+                        <div class="options-row">
+                            <p>Width</p>
+                            <input type="range" min="1" max="10000" value="1000" class="slider" id="myRange">
+                            <input type="number" id="tentacles" name="tentacles" min="1" max="10000" value="1000">
+                        </div>
+                        <div class="options-row">
+                            <p>Height</p>
+                            <input type="range" min="1" max="10000" value="1000" class="slider" id="myRange">
+                            <input type="number" id="tentacles" name="tentacles" min="1" max="10000" value="1000">
+                        </div>
+                    </div>
+                    <div id="compression">
+                        <div class="options-row">
+                            <p>Compression</p>
+                            <input type="range" min="0" max="100" value="100" class="slider" id="myRange">
+                            <input type="number" id="tentacles" name="tentacles" min="0" max="100" value="100">
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset id="export">
+                <legend>Export</legend>
+                <p>File output</p>
+                <div id="export-type">
+                    <div>
+                        <input type="radio" name="export" id="jpeg">
+                        <label for="jpeg">JPEG</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="export" id="png">
+                        <label for="png">PNG</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="export" id="webp">
+                        <label for="webp">WebP</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="export" id="gif">
+                        <label for="gif">GIF</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="export" id="tiff">
+                        <label for="tiff">TIFF</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="export" id="avif">
+                        <label for="avif">AVIF</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="export" id="heif">
+                        <label for="heif">HEIF</label>
+                    </div>
+                </div>
+                <input type="submit" value="Download">
+            </fieldset>
+        </form>
+    </main>
+</body>
+</html>

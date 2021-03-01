@@ -1,11 +1,12 @@
 {
   "name": "sharper",
   "version": "1.0.0",
-  "description": "Sharper is a web app that serves as a UI for the sharp WebP converter (https://github.com/lovell/sharp).",
+  "description": "Sharper is a image converter based on the sharp image processor (https://github.com/lovell/sharp). It allows the conversion of JPEG, PNG, WebP, AVIF, TIFF, GIF or SVG, into JPEG, PNG, WebP, AVIF, TIFF, HEIF or GIF. It also gives you the option of changing the compression and resolution of the images.",
   "main": "index.js",
   "scripts": {
     "test": "",
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "update": "npm-check -u"
   },
   "repository": {
     "type": "git",
@@ -14,7 +15,14 @@
   "author": "Carlos Dario",
   "license": "Apache-2.0",
   "dependencies": {
+    "7zip-bin": "^5.1.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "node-7z": "^2.1.2",
     "sharp": "^0.27.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7",
+    "npm-check": "^5.9.2"
   }
 }
