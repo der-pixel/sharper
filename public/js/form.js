@@ -2,13 +2,26 @@
 
 window.onload = () => {
     const form = document.getElementById( "form" );
-    form.addEventListener( "submit", function ( event ) {
+    form.addEventListener( "submit", (event)=>{
         event.preventDefault();
-        download();
+        download(form);
+    } );
+
+    const files = document.getElementById( "file-load" );
+    form.addEventListener( "change", ()=>{
+        uploadedFile("file-load","file-selected");
     } );
 }
 
-const download = async function(){
+const uploadedFile = async (id,textId) =>{
+    let files = document.getElementById(id).files;
+    let text = document.getElementById(textId);
+    text.innerText = files.length>1||files.length==0 ? files.length+" files selected" : files.length+" file selected";
+}
+
+const download = async function(data){
+    const FD = new FormData(data);
+    console.log(FD.get("file-load"));
     const sendForm = await fetch('/', {
         method: 'POST',
         headers: {

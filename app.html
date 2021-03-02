@@ -24,12 +24,13 @@
             <fieldset id="files">
                 <legend>Select files</legend>
                 <div id="file-loader">
-                    <label for="load-files">Load files</label>
-                    <input type="file" multiple="multiple" name="load-files" id="load-files" accept="image/jpeg, image/png, image/webp, image/avif, image/tiff, image/gif, ">
+                    <label for="file-load">Load files</label>
+                    <input type="file" multiple="multiple" name="file-load" id="file-load" accept="image/jpeg, image/png, image/webp, image/avif, image/tiff, image/gif, ">
                     <picture id="file-loader-img">
                         <img src="images/image-loader.svg" alt=""/>
                     </picture>
-                    <p>The files must be JPEG, PNG, WebP, AVIF, TIFF or GIF</p>
+                    <p id="file-selected">0 files selected</p>
+                    <p id="file-advice">The files must be JPEG, PNG, WebP, AVIF, TIFF or GIF</p>
                 </div>
             </fieldset>
             <fieldset id="options">
@@ -62,31 +63,31 @@
                 <p>File output</p>
                 <div id="export-type">
                     <div>
-                        <input type="radio" name="export" id="jpeg">
+                        <input type="radio" name="export" id="jpeg" value="jpeg">
                         <label for="jpeg">JPEG</label>
                     </div>
                     <div>
-                        <input type="radio" name="export" id="png">
+                        <input type="radio" name="export" id="png" value="png">
                         <label for="png">PNG</label>
                     </div>
                     <div>
-                        <input type="radio" name="export" id="webp">
+                        <input type="radio" name="export" id="webp" value="webp" checked="checked">
                         <label for="webp">WebP</label>
                     </div>
                     <div>
-                        <input type="radio" name="export" id="gif">
+                        <input type="radio" name="export" id="gif" value="gif">
                         <label for="gif">GIF</label>
                     </div>
                     <div>
-                        <input type="radio" name="export" id="tiff">
+                        <input type="radio" name="export" id="tiff" value="tiff">
                         <label for="tiff">TIFF</label>
                     </div>
                     <div>
-                        <input type="radio" name="export" id="avif">
+                        <input type="radio" name="export" id="avif" value="avif">
                         <label for="avif">AVIF</label>
                     </div>
                     <div>
-                        <input type="radio" name="export" id="heif">
+                        <input type="radio" name="export" id="heif" value="heif">
                         <label for="heif">HEIF</label>
                     </div>
                 </div>
