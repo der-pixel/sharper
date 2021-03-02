@@ -11,7 +11,6 @@ npm install --save 7zip-bin
 ```
 
 ## Optional modules
-Be aware that if you don't install these modules you will have to modify the package.json file 
 ```
 npm install --save-dev nodemon
 npm install --save-dev npm-check
