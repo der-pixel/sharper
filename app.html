@@ -11,6 +11,7 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="style/style.css">
+    <script src="js/form.js"></script>
     <title>Sharper</title>
 </head>
 <body>
@@ -19,7 +20,7 @@
             <img src="images/sharp.svg" alt="Icon of the web app" id="main-icon"/>
         </picture>
         <h1>Sharper</h1>
-        <form action="" method="post">
+        <form id="form" action="/" method="post" enctype="multipart/form-data">
             <fieldset id="files">
                 <legend>Select files</legend>
                 <div id="file-loader">
@@ -89,7 +90,7 @@
                         <label for="heif">HEIF</label>
                     </div>
                 </div>
-                <input type="submit" value="Download">
+                <input type="submit" id="download" value="Download"></input>
             </fieldset>
         </form>
     </main>
