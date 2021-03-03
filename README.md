@@ -5,6 +5,8 @@ Sharper is a image converter based on the sharp image processor (https://github.
 ```
 npm install --save sharp
 npm install --save express
+npm install --save express-fileupload
+npm install --save btoa
 npm install --save dotenv
 npm install --save node-7z
 npm install --save 7zip-bin
