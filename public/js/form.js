@@ -6,7 +6,7 @@ window.onload = () => {
     const form = document.getElementById("form");
     form.addEventListener( "submit", (event)=>{
         event.preventDefault();
-        download(form);
+        makeRequest(form);
     } );
 
     // When a file is uploaded it executes the uploadedFile() function
@@ -26,10 +26,22 @@ function uploadedFile(id, textId){
 }
 
 // Download the files
-async function download(form){
-    // Send a POST request to the server with the form
-    await sendForm(new FormData(form));
+async function makeRequest(form){
+    // Send the form through a POST request to the server and when you get the response download it
+    download(await sendForm(new FormData(form)));
 }
+
+async function download(data){
+    // Send a POST request to the server with the form
+    const a = document.createElement("a");
+    console.log(data);
+    a.href = await data.download[0];
+    a.download = "";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
+
 
 // Send the form
 async function sendForm(form){
@@ -38,5 +50,5 @@ async function sendForm(form){
         method: 'POST',
         body: form
     });
-    console.log(await sendForm.json());
+    return sendForm.json();
 }
