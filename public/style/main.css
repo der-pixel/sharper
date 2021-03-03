@@ -216,13 +216,13 @@ input[type=number] {
 	font-weight: 400;
 }
 
-#export-type{
+#output-type{
 	display: flex;
 	column-gap: 8px;
 	padding: 0 16px;
 }
 
-#export p{
+#output p{
 	margin: 16px 16px 12px;
 	color: #AEB5BE;
 	font-size: 14px;
