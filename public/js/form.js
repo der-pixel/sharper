@@ -34,9 +34,8 @@ async function makeRequest(form){
 async function download(data){
     // Send a POST request to the server with the form
     const a = document.createElement("a");
-    console.log(data);
-    a.href = await data.download[0];
-    a.download = "";
+    a.href = await data.data;
+    a.download = "images.zip";
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);

@@ -15,12 +15,11 @@
   "author": "Carlos Dario",
   "license": "Apache-2.0",
   "dependencies": {
-    "7zip-bin": "^5.1.0",
+    "archiver": "^5.2.0",
     "btoa": "^1.2.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-fileupload": "^1.2.1",
-    "node-7z": "^2.1.2",
     "sharp": "^0.27.2"
   },
   "devDependencies": {
