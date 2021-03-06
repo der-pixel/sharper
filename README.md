@@ -1,6 +1,6 @@
-<div style="text-align: center;">
+<p align="center">
   <img src="public/images/icon.svg" width="100" height="100"/>
-</div>
+</p>
 
 # sharper
 Sharper is an image converter based on the sharp image processor (https://github.com/lovell/sharp). It allows the conversion of JPEG, PNG, WebP, AVIF, TIFF and GIF, into JPEG, PNG, WebP, AVIF and TIFF. It also gives you the option of changing the compression and resolution of the images.
