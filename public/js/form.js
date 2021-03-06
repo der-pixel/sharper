@@ -39,7 +39,7 @@ function updateSlider(slider, number, type){
         number.value = slider.value;
     });
     number.addEventListener("input", ()=>{
-        numberRegex;
+        numberRegex(type);
         slider.value = number.value;
     });
     number.addEventListener("keydown", (e)=>{
@@ -52,9 +52,16 @@ function updateSlider(slider, number, type){
             }
         }
     })
-    const numberRegex = ()=>{
+    const numberRegex = (type)=>{
         let regex = type==2?/^[1-9]{1}[0-9]{0,2}/:/^[1-9]{1}[0-9]{0,4}/;
         // caps the number to be between 1 and 10000)
+        console.log(number.value);
+        if(parseInt(number.value)>10000){
+            number.value = 10000;
+        }
+        else if(parseInt(number.value)<1){
+            number.value = 1;
+        }
         number.value = number.value?((regex.test(number.value))?(number.value.match(regex)[0]):1):1;
         number.value.toString();
     }
