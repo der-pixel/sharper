@@ -1,5 +1,5 @@
 <div style="text-align: center;">
-  <img src="public/images/icon.svg" style="width: 100px; height: auto;"/>
+  <img src="public/images/icon.svg" width="100" height="100"/>
 </div>
 
 # sharper
