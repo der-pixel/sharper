@@ -23,133 +23,157 @@ app.post('/upload', async function(req, res) {
    // get the files of the formData
    let files = req.files;
 
-   if (!files || Object.keys(files).length === 0) {
-      return res.status(400).send('No files were uploaded.');
+   // the counter variable determines the name of the output images
+   let counter = 1;
+   if(typeof files.fileLoad?.name === "undefined"){
+      for(element of files.fileLoad){
+         await convert(element.data);
+         counter++;
+      }
+      await exportFiles();
    }
-   else{
-      // the counter variable determines the name of the output images
-      let counter = 1;
-
-      // the convert function check what's the
-      const convert = (element)=>{
-         switch(req.body.output){
-            case 'jpeg': jpeg(element); break;
-            case 'png': png(element); break;
-            case 'webp': webp(element); break;
-            case 'avif': avif(element); break;
-            case 'tiff': tiff(element); break;
-         }
-      }
-
-      const jpeg = async (element)=>{
-         await sharp(element)
-            .jpeg({quality: Number(req.body.sliderCompression)})
-            .resize(Number(req.body.sliderWidth), Number(req.body.sliderHeight), {
-               fit: 'cover',
-               position: 'center'})
-            .toFile('compress/'+counter+'.'+req.body.output);
-      }
-
-      const png = async (element)=>{
-         await sharp(element)
-            .png({quality: (Math.ceil(Number(req.body.sliderCompression)/10))==10?9:Math.ceil(Number(req.body.sliderCompression)/10)})
-            .resize(Number(req.body.sliderWidth), Number(req.body.sliderHeight), {
-               fit: 'cover',
-               position: 'center'})
-            .toFile('compress/'+counter+'.'+req.body.output);
-      }
-
-      const webp = async (element)=>{
-         await sharp(element)
-            .webp({quality: Number(req.body.sliderCompression)})
-            .resize(Number(req.body.sliderWidth), Number(req.body.sliderHeight), {
-               fit: 'cover',
-               position: 'center'})
-            .toFile('compress/'+counter+'.'+req.body.output);
-      }
-
-      const avif = async (element)=>{
-         await sharp(element)
-            .avif({quality: 100})
-            .resize(Number(req.body.sliderWidth), Number(req.body.sliderHeight), {
-               fit: 'cover',
-               position: 'center'})
-            .toFile('compress/'+counter+'.'+req.body.output);
-      }
-
-      const tiff = async (element)=>{
-         await sharp(element)
-            .tiff({quality: Number(req.body.sliderCompression)})
-            .resize(Number(req.body.sliderWidth), Number(req.body.sliderHeight), {
-               fit: 'cover',
-               position: 'center'})
-            .toFile('compress/'+counter+'.'+req.body.output);
-      }
-
-      const finish = async ()=>{
-         // avif files are really slow to make so a delay is put in place, that way when the server tries to make the zip file and delete the images after that, it doesn't crash
-         const terminator = req.body.output=="avif"?(5000*counter):0;
-         setTimeout(async ()=>{
-            // create a file to stream archive data to.
-            const output = fs.createWriteStream(__dirname + '/images.zip');
-            const archive = archiver('zip', {
-               zlib: { level: 9 } // Sets the compression level.
-            });
-
-            // pipe archive data to the file
-            archive.pipe(output);
-
-            // append files from a sub-directory, putting its contents at the root of archive
-            archive.directory('compress/', false);
-
-            // finalize the archive (ie we are done appending files but streams have to finish yet)
-            // 'close', 'end' or 'finish' may be fired right after calling this method so register to them beforehand
-            await archive.finalize();
-
-            output.on('close', function() {
-               // send a response with the zip
-               fs.readFile(__dirname + '/images.zip', (err, data) => {
-                  if (err) throw err;
-                  return res.status(200).json({data:'data:application/zip;base64,'+btoa(arrayBufferToString(data))});
-               });
-               
-               //remove the files
-               fs.readdir("compress/", (err, files)=>{
-                  files.forEach(el =>{
-                     fs.promises.rm("compress/"+el);
-                  })
-               });
-               // remove the zip
-               fs.promises.rm("images.zip");
-            });
-         }, terminator)
+   else if(typeof files.fileLoad.name === "string"){
+      // get the file and modify it
+      await convert(files.fileLoad.data);
+      //await finish();
+      //await jpeg(files.fileLoad.data);
+      await exportFiles();
          
+   }
+   
+   // the convert function check what's the type of the input file
+   async function convert(element){
+      // i know, a switch statement is better, but it doesn't execute properly the async functions and it returns an error
+      /*if(req.body.output=="jpeg"){
+         await jpeg(element);
       }
+      else if(req.body.output=="png"){
 
-      if(typeof files.fileLoad?.name === "undefined"){
-         for(element of files.fileLoad){
-            convert(element.data);
-            counter++;
-         }
-         await finish();
       }
-      else if(typeof files.fileLoad.name === "string"){
-         // get the file and modify it
-         convert(files.fileLoad.data);
-         await finish();
+      else if(req.body.output=="webp"){
+
+      }
+      else if(req.body.output=="avif"){
+
+      }
+      else if(req.body.output=="tiff"){
+
+      }*/
+      switch(req.body.output){
+         case 'jpeg':
+            await jpeg(element);
+            break;
+         case 'png': await png(element); break;
+         case 'webp': await webp(element); break;
+         case 'avif': await avif(element); break;
+         case 'tiff': await tiff(element); break;
       }
    }
+
+   async function jpeg(element){
+      await sharp(element)
+         .jpeg({quality: Number(req.body.compressionSlider)})
+         .resize(Number(req.body.widthSlider), Number(req.body.heightSlider), {
+            fit: 'cover',
+            position: 'center'})
+         .toFile('compress/'+counter+'.'+req.body.output);
+   }
+
+   async function png(element){
+      await sharp(element)
+         .png({quality: (Math.ceil(Number(req.body.compressionSlider)/10))==10?9:Math.ceil(Number(req.body.compressionSlider)/10)})
+         .resize(Number(req.body.widthSlider), Number(req.body.heightSlider), {
+            fit: 'cover',
+            position: 'center'})
+         .toFile('compress/'+counter+'.'+req.body.output);
+   }
+
+   async function webp(element){
+      await sharp(element)
+         .webp({quality: Number(req.body.compressionSlider)})
+         .resize(Number(req.body.widthSlider), Number(req.body.heightSlider), {
+            fit: 'cover',
+            position: 'center'})
+         .toFile('compress/'+counter+'.'+req.body.output);
+   }
+
+   async function avif(element){
+      await sharp(element)
+         .avif({quality: Number(req.body.compressionSlider)})
+         .resize(Number(req.body.widthSlider), Number(req.body.heightSlider), {
+            fit: 'cover',
+            position: 'center'})
+         .toFile('compress/'+counter+'.'+req.body.output);
+   }
+
+   async function tiff(element){
+      await sharp(element)
+         .tiff({quality: Number(req.body.compressionSlider)})
+         .resize(Number(req.body.widthSlider), Number(req.body.heightSlider), {
+            fit: 'cover',
+            position: 'center'})
+         .toFile('compress/'+counter+'.'+req.body.output);
+   }
+
+   async function exportFiles(){
+      const output = fs.createWriteStream(__dirname + '/images.zip');
+      const archive = archiver('zip', {
+         zlib: { level: 9 } // Sets the compression level.
+      });
+
+      // pipe archive data to the file
+      archive.pipe(output);
+
+      // append files from a sub-directory, putting its contents at the root of archive
+      archive.directory('compress/', false);
+
+      // finalize the archive (ie we are done appending files but streams have to finish yet)
+      // 'close', 'end' or 'finish' may be fired right after calling this method so register to them beforehand
+      await archive.finalize();
+
+      output.on('finish', function(){
+         // send a response with the zip
+         fs.readFile(__dirname + '/images.zip', (err, data) => {
+            if (err) throw err;
+            return res.status(200).json({data:'data:application/zip;base64,'+btoa(arrayBufferToString(data))});
+         });
+      });
+
+      output.on('close', function(){
+         //remove the files
+         fs.readdir("compress/", (err, files)=>{
+            files.forEach(el =>{
+               fs.promises.rm("compress/"+el);
+            })
+         });
+         // remove the zip
+         fs.promises.rm("images.zip");
+      });
+      // avif files are really slow to make so a delay is put in place, that way when the server tries to make the zip file and delete the images after that, it doesn't crash
+      const terminator = req.body.output=="avif"?(5000*counter):0;
+      setTimeout(async ()=>{
+         // create a file to stream archive data to.
+         
+
+         
+      }, 5000)
+   }
+
+   
+   
 });
 
-function arrayBufferToString(buffer){
 
+
+
+// transform a buffer into an array buffer and then into a string
+function arrayBufferToString(buffer){
    var bufView = new Uint16Array(buffer);
    var length = bufView.length;
    var result = '';
    var addition = Math.pow(2,16)-1;
 
    for(var i = 0;i<length;i+=addition){
-
        if(i + addition > length){
            addition = length - i;
        }
@@ -157,7 +181,6 @@ function arrayBufferToString(buffer){
    }
 
    return result;
-
 }
 
 // When the server is started show the port

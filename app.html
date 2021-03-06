@@ -25,7 +25,7 @@
                 <legend>Select files</legend>
                 <div id="file-loader">
                     <label for="fileLoad">Load files</label>
-                    <input type="file" multiple="multiple" name="fileLoad" id="fileLoad" accept="image/jpeg, image/png, image/webp, image/avif, image/tiff, image/gif">
+                    <input type="file" multiple="multiple" name="fileLoad" id="fileLoad" accept="image/jpeg, image/png, image/webp, image/avif, image/tiff, image/gif" required="required">
                     <picture id="file-loader-img">
                         <img src="images/image-loader.svg" alt=""/>
                     </picture>
@@ -40,20 +40,20 @@
                     <div id="resolution">
                         <div class="options-row">
                             <p>Width</p>
-                            <input type="range" min="1" max="10000" value="1000" class="slider" name="sliderWidth">
-                            <input type="number" min="1" max="10000" value="1000">
+                            <input type="range" min="1" max="10000" value="1000" class="slider" name="widthSlider" id="widthSlider">
+                            <input type="number" min="1" max="10000" value="1000" id="widthNumber">
                         </div>
                         <div class="options-row">
                             <p>Height</p>
-                            <input type="range" min="1" max="10000" value="1000" class="slider" name="sliderHeight">
-                            <input type="number" min="1" max="10000" value="1000">
+                            <input type="range" min="1" max="10000" value="1000" class="slider" name="heightSlider" id="heightSlider">
+                            <input type="number" min="1" max="10000" value="1000" id="heightNumber">
                         </div>
                     </div>
                     <div id="compression">
                         <div class="options-row">
                             <p>Compression</p>
-                            <input type="range" min="0" max="100" value="100" class="slider" name="sliderCompression">
-                            <input type="number" min="0" max="100" value="1">
+                            <input type="range" min="1" max="100" value="80" class="slider" name="compressionSlider" id="compressionSlider">
+                            <input type="number" min="1" max="100" value="80" id="compressionNumber">
                         </div>
                     </div>
                 </div>
