@@ -59,6 +59,10 @@ app.post('/upload', async function(req, res) {
       else if(req.body.output=="tiff"){
 
       }*/
+      if (!fs.existsSync('./compress')){
+         fs.mkdirSync('./compress');
+      }
+
       switch(req.body.output){
          case 'jpeg':
             await jpeg(element);
@@ -169,6 +173,7 @@ app.post('/upload', async function(req, res) {
 // transform a buffer into an array buffer and then into a string
 function arrayBufferToString(buffer){
    var bufView = new Uint16Array(buffer);
+   console.log(bufView.byteLength);
    var length = bufView.length;
    var result = '';
    var addition = Math.pow(2,16)-1;
