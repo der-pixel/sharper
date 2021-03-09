@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="public/images/icon.svg" width="100" height="100"/>
+  <img src="src/public/images/icon.svg" width="100" height="100"/>
 </p>
 
 # sharper
@@ -24,4 +24,4 @@ nodemon build/app.js
 This web app doesn't do validation, if you want to make a website with it you will have to implement it yourself. You can also allow users to upload SVG files but users can inject javascript code in SVG so it's dangerous.
 
 ## Example image of the App
-<img src="public/images/sharper.webp" style="width:100%; display: block">
+<img src="src/public/images/sharper.webp" style="width:100%; display: block">
