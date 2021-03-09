@@ -10,19 +10,19 @@ window.onload = () => {
     // set the regex filter to the width number to avoid wrong numbers
     const widthSlider = <HTMLInputElement>document.getElementById("widthSlider");
     const widthNumber = <HTMLInputElement>document.getElementById("widthNumber");
-    updateInputs(widthSlider, widthNumber, 1);
+    updateInputs(widthSlider, widthNumber, 1000);
 
     // link the height range and the height number so they change when the other does
     // set the regex filter to the height number to avoid wrong numbers
     const heightSlider = <HTMLInputElement>document.getElementById("heightSlider");
     const heightNumber = <HTMLInputElement>document.getElementById("heightNumber");
-    updateInputs(heightSlider, heightNumber, 1);
+    updateInputs(heightSlider, heightNumber, 1000);
 
     // link the compression range and the compression number so they change when the other does
     // set the regex filter to the compression number to avoid wrong numbers
     const compressionSlider = <HTMLInputElement>document.getElementById("compressionSlider");
     const compressionNumber = <HTMLInputElement>document.getElementById("compressionNumber");
-    updateInputs(compressionSlider, compressionNumber, 2);
+    updateInputs(compressionSlider, compressionNumber, 100);
 
     // get the from from the HTML
     const form = <HTMLFormElement>document.getElementById("form");
@@ -67,7 +67,7 @@ function numberRegex(number: HTMLInputElement, type: number){
     });
 
     // the regex that will check if the number is valid
-    let regex = type==2?/^[1-9]{1}[0-9]{0,2}/:/^[1-9]{1}[0-9]{0,4}/;
+    let regex = type==100?/^[1-9]{1}[0-9]{0,2}/:/^[1-9]{1}[0-9]{0,4}/;
     // limits the number to be between 1 and 10000
     if(parseInt(number.value)>10000){
         number.value = "10000";
