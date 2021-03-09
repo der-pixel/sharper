@@ -86,9 +86,8 @@ app.post('/upload', async function(req, res) {
 
    // take a file and convert it to PNG
    async function png(element: any, toFile: any){
-      console.log((Math.ceil(Number(req.body.compressionSlider)/10))==10?9:Math.ceil(Number(req.body.compressionSlider)/10));
       await sharp(element)
-         .png({compressionLevel: (Math.ceil(Number(req.body.compressionSlider)/10))==10?9:Math.ceil(Number(req.body.compressionSlider)/10)})
+         .png({compressionLevel: (Math.ceil(Number(req.body.compressionSlider)/10)-1)})
          .resize(Number(req.body.widthSlider), Number(req.body.heightSlider), {
             fit: 'cover',
             position: 'center'})
