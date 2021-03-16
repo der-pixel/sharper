@@ -8,6 +8,7 @@ sass.compiler = require('node-sass');
 const merge = require('merge-stream');
 const del = require('del');
 const uglify = require("gulp-uglify");
+const { watch } = require('gulp');
 
 // empty the build folder
 function resetGulp() {
@@ -35,4 +36,10 @@ function typescriptGulp() {
         .pipe(gulp.dest('./build'));
 };
 
+function watchGulp(){
+  watch('src/**/*', series(resetGulp, staticGulp, sassGulp, typescriptGulp));
+}
+
 exports.default = series(resetGulp, staticGulp, sassGulp, typescriptGulp);
+
+exports.watch = watchGulp;
