@@ -2,7 +2,7 @@
   "name": "sharper",
   "version": "1.0.0",
   "description": "Sharper is a image converter based on the sharp image processor (https://github.com/lovell/sharp). It allows the conversion of JPEG, PNG, WebP, AVIF, TIFF, GIF or SVG, into JPEG, PNG, WebP, AVIF, TIFF, HEIF or GIF. It also gives you the option of changing the compression and resolution of the images.",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "",
     "start": ""

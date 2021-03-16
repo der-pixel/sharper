@@ -3,9 +3,17 @@
 </p>
 
 # sharper
-Sharper is an image converter based on the sharp image processor (https://github.com/lovell/sharp). It allows the conversion of JPEG, PNG, WebP, AVIF, TIFF and GIF, into JPEG, PNG, WebP, AVIF and TIFF. It also gives you the option of changing the compression and resolution of the images.
+Sharper is an image converter based on NodeJS and the sharp image processor (https://github.com/lovell/sharp). It allows the conversion of JPEG, PNG, WebP, AVIF, TIFF and GIF, into JPEG, PNG, WebP, AVIF and TIFF. It also gives you the option of changing the compression and resolution of the images.
 
 ## Install packages
+### Global packages
+You need to have gulp-cli and nodemon globally installed
+```
+npm install -g nodemon
+npm install -g gulp-cli
+```
+
+### Local packages
 ```
 npm install
 ```
@@ -13,6 +21,11 @@ npm install
 ## Build project
 ```
 gulp
+```
+
+## Watch files
+```
+gulp watch
 ```
 
 ## Run server
