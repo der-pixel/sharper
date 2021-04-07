@@ -33,9 +33,9 @@ app.post('/upload', async function(req, res) {
       // this is because if express-fileupload only gets one file it doesn't create an array of objects, it just adds the object. So instead of always doing {[files]} it does {file} when it's only one file
       if(Array.isArray(files.fileLoad)){
          // loop through the  to get the data of each image
-         for(let element of files.fileLoad){
+         for(let image of files.fileLoad){
             // convert the images
-            await convert(element.data, (__dirname + compressFolder + '/' + counter+'.' + req.body.output));
+            await convert(image.data, (__dirname + compressFolder + '/' + counter+'.' + req.body.output));
             // increase the counter
             counter++;
          }
@@ -54,7 +54,7 @@ app.post('/upload', async function(req, res) {
    }
    
    // check what's the output file format and depending on it it execute a different function to convert the images
-   async function convert(element: any, toFile: any){
+   async function convert(image: any, toFile: string){
       // check if the folder where you are going to export the images exists, if it doesn't then create it
       if (!fs.existsSync(__dirname + compressFolder)){
          fs.mkdirSync(__dirname + compressFolder);
@@ -62,21 +62,21 @@ app.post('/upload', async function(req, res) {
       // depending on the selected output file format execute a function to convert the images to that format
       switch(req.body.output){
          // export to JPEG
-         case 'jpeg': await jpeg(element, toFile); break;
+         case 'jpeg': await toJpeg(image, toFile); break;
          // export to PNG
-         case 'png': await png(element, toFile); break;
+         case 'png': await toPng(image, toFile); break;
          // export to WebP
-         case 'webp': await webp(element, toFile); break;
+         case 'webp': await toWebp(image, toFile); break;
          // export to AVIF
-         case 'avif': await avif(element, toFile); break;
+         case 'avif': await toAvif(image, toFile); break;
          // export to TIFF
-         case 'tiff': await tiff(element, toFile); break;
+         case 'tiff': await toTiff(image, toFile); break;
       }
    }
 
    // take a file and convert it to JPEG
-   async function jpeg(element: any, toFile: any){
-      await sharp(element)
+   async function toJpeg(image: any, toFile: string){
+      await sharp(image)
          .jpeg({quality: Number(req.body.compressionSlider)})
          .resize(Number(req.body.widthSlider), Number(req.body.heightSlider), {
             fit: 'cover',
@@ -85,9 +85,9 @@ app.post('/upload', async function(req, res) {
    }
 
    // take a file and convert it to PNG
-   async function png(element: any, toFile: any){
-      await sharp(element)
-         .png({compressionLevel: (Math.ceil(Number(req.body.compressionSlider)/10)-1)})
+   async function toPng(image: any, toFile: string){
+      await sharp(image)
+         .png({quality: Number(req.body.compressionSlider)})
          .resize(Number(req.body.widthSlider), Number(req.body.heightSlider), {
             fit: 'cover',
             position: 'center'})
@@ -95,8 +95,8 @@ app.post('/upload', async function(req, res) {
    }
 
    // take a file and convert it to WebP
-   async function webp(element: any, toFile: any){
-      await sharp(element)
+   async function toWebp(image: any, toFile: string){
+      await sharp(image)
          .webp({quality: Number(req.body.compressionSlider)})
          .resize(Number(req.body.widthSlider), Number(req.body.heightSlider), {
             fit: 'cover',
@@ -105,8 +105,8 @@ app.post('/upload', async function(req, res) {
    }
 
    // take a file and convert it to AVIF
-   async function avif(element: any, toFile: any){
-      await sharp(element)
+   async function toAvif(image: any, toFile: string){
+      await sharp(image)
          .avif({quality: Number(req.body.compressionSlider)})
          .resize(Number(req.body.widthSlider), Number(req.body.heightSlider), {
             fit: 'cover',
@@ -115,8 +115,8 @@ app.post('/upload', async function(req, res) {
    }
 
    // take a file and convert it to TIFF
-   async function tiff(element: any, toFile: any){
-      await sharp(element)
+   async function toTiff(image: any, toFile: string){
+      await sharp(image)
          .tiff({quality: Number(req.body.compressionSlider)})
          .resize(Number(req.body.widthSlider), Number(req.body.heightSlider), {
             fit: 'cover',
