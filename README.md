@@ -20,17 +20,17 @@ npm install
 
 ## Build project
 ```
-gulp
+npm run build
 ```
 
 ## Watch files
 ```
-gulp watch
+npm run watch
 ```
 
 ## Run server
 ```
-nodemon build/app.js
+npm run start
 ```
 
 ## BE AWARE

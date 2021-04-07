@@ -4,7 +4,7 @@ window.onload = () => {
     const files = <HTMLInputElement>document.getElementById("fileLoad");
     files.addEventListener( "change", ()=>{
         uploadedFile("fileLoad","file-selected");
-    } );
+    });
     
     // link the width range and the width number so they change when the other does
     // set the regex filter to the width number to avoid wrong numbers
