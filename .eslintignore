@@ -1,0 +1,5 @@
+.*
+*.test.js
+*.test.ts
+./build
+./node_modules
