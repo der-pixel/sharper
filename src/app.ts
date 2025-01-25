@@ -151,7 +151,7 @@ app.post('/upload', async function(req, res) {
       // on close
       output.on('close', function(){
          //remove the images from compressFolder
-         fs.promises.rmdir(__dirname + compressFolder, { recursive: true});
+         fs.promises.rm(__dirname + compressFolder, { recursive: true});
          // remove the zip file
          fs.promises.rm(__dirname + "/images.zip");
       });
