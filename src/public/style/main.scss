@@ -242,6 +242,10 @@ input[type=number] {
 	user-select: none;
 }
 
+[type=radio]:hover ~ label{
+	cursor: pointer;
+}
+
 [type=radio]:checked ~ label {
 	background-color: #2196F3;
 	border-color: #2196F3;
