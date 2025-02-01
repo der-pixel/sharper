@@ -8,7 +8,7 @@ const sass = gulpSass(dartSass);
 import merge from "merge-stream";
 import { deleteAsync } from "del";
 import uglify from "gulp-uglify";
-import debug from 'gulp-debug';
+import debug from "gulp-debug";
 
 // empty the build folder
 async function resetGulp() {
@@ -19,8 +19,10 @@ async function resetGulp() {
 // move the static files to the destination folder
 function staticGulp() {
   return merge(
-    src(["./src/public/**/*", "!./src/public/**/*.scss"], { base: "./src" }).pipe(debug({ title: "Public files:" })),
-    src("./src/**/*.html", { base: "./src" }).pipe(debug({ title: "HTML:" })),
+    src(["./src/public/**/*", "!./src/public/**/*.scss"], {
+      base: "./src",
+    }).pipe(debug({ title: "Public files:" })),
+    src("./src/**/*.html", { base: "./src" }).pipe(debug({ title: "HTML:" }))
   ).pipe(dest("./build"));
 }
 
