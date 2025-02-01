@@ -19,7 +19,7 @@ async function resetGulp() {
 // move the static files to the destination folder
 function staticGulp() {
   return merge(
-    src("./src/public/**/*", { base: "./src" }).pipe(debug({ title: "Public files:" })),
+    src(["./src/public/**/*", "!./src/public/**/*.scss"], { base: "./src" }).pipe(debug({ title: "Public files:" })),
     src("./src/**/*.html", { base: "./src" }).pipe(debug({ title: "HTML:" })),
   ).pipe(dest("./build"));
 }
