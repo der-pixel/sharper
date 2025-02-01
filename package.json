@@ -7,7 +7,8 @@
     "test": "",
     "start": "nodemon build/app.js",
     "build": "gulp",
-    "watch": "gulp watch"
+    "watch": "gulp watch",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,8 @@
     "sharp": "^0.33.5"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.6.1",
+    "@commitlint/config-conventional": "^19.6.0",
     "@types/archiver": "^6.0.3",
     "@types/btoa": "^1.2.5",
     "@types/express": "^5.0.0",
@@ -35,6 +38,7 @@
     "gulp-sass": "^6.0.0",
     "gulp-typescript": "^6.0.0-alpha.1",
     "gulp-uglify": "^3.0.2",
+    "husky": "^8.0.0",
     "merge-stream": "^2.0.0",
     "nodemon": "^3.1.9",
     "sass": "^1.83.4",
