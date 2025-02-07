@@ -5,7 +5,6 @@ const tsProject = gulpTypescript.createProject("tsconfig.json");
 import * as dartSass from "sass";
 import gulpSass from "gulp-sass";
 const sass = gulpSass(dartSass);
-import merge from "merge-stream";
 import { deleteAsync } from "del";
 import uglify from "gulp-uglify";
 import debug from "gulp-debug";
@@ -17,13 +16,22 @@ async function resetGulp() {
 }
 
 // move the static files to the destination folder
-function staticGulp() {
-  return merge(
-    src(["./src/public/**/*", "!./src/public/**/*.scss"], {
+function publicGulp() {
+  return src(
+    ["./src/public/**/*", "!./src/public/**/*.scss", "!./src/public/**/*.ts"],
+    {
       base: "./src",
-    }).pipe(debug({ title: "Public files:" })),
-    src("./src/**/*.html", { base: "./src" }).pipe(debug({ title: "HTML:" }))
-  ).pipe(dest("./build"));
+      encoding: false,
+    }
+  )
+    .pipe(dest("./build"))
+    .pipe(debug({ title: "Public files:" }));
+}
+
+function htmlGulp() {
+  return src("./src/**/*.html", { base: "./src" })
+    .pipe(dest("./build"))
+    .pipe(debug({ title: "HTML:" }));
 }
 
 // compile scss into css
@@ -45,10 +53,19 @@ function typescriptGulp() {
 }
 
 function watchGulp() {
-  watch("src/**/*", series(resetGulp, staticGulp, sassGulp, typescriptGulp));
+  watch(
+    "src/**/*",
+    series(resetGulp, publicGulp, htmlGulp, sassGulp, typescriptGulp)
+  );
 }
 
-const _default = series(resetGulp, staticGulp, sassGulp, typescriptGulp);
+const _default = series(
+  resetGulp,
+  publicGulp,
+  htmlGulp,
+  sassGulp,
+  typescriptGulp
+);
 export { _default as default };
 
 const _watch = watchGulp;
